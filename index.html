@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michael J. Mulrenan Scholarship</title>
+  <meta
+    name="description"
+    content="The Michael J. Mulrenan Scholarship honors a legacy of service, education, and community through scholarship support and a yearly golf tournament fundraiser."
+  >
+  <style>
+    :root {
+      --bg: #f5efe5;
+      --surface: rgba(255, 252, 246, 0.86);
+      --surface-strong: #fffaf2;
+      --surface-dark: #183642;
+      --text: #17313b;
+      --muted: #5b6d73;
+      --accent: #b8843c;
+      --accent-deep: #8f6226;
+      --accent-soft: #ead5b0;
+      --line: rgba(23, 49, 59, 0.12);
+      --shadow: 0 28px 70px rgba(24, 54, 66, 0.13);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(184, 132, 60, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(24, 54, 66, 0.18), transparent 28%),
+        linear-gradient(180deg, #f8f3eb 0%, #f4ede2 44%, #efe5d7 100%);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      width: min(calc(100% - 32px), var(--container));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(248, 243, 235, 0.72);
+      border-bottom: 1px solid rgba(23, 49, 59, 0.08);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand__logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 10px 25px rgba(24, 54, 66, 0.12);
+      background: #fff;
+      padding: 6px;
+    }
+
+    .brand__eyebrow,
+    .section-label {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.74rem;
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .brand__title {
+      margin: 2px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    .nav-toggle {
+      display: none;
+      border: 0;
+      background: var(--surface-strong);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(24, 54, 66, 0.08);
+    }
+
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .site-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: 0.2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      background: rgba(255, 250, 242, 0.9);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 48px 0 28px;
+    }
+
+    .hero__panel {
+      position: relative;
+      overflow: hidden;
+      padding: 42px;
+      border-radius: 36px;
+      background:
+        linear-gradient(135deg, rgba(255, 250, 242, 0.95), rgba(243, 231, 211, 0.8)),
+        rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .hero__panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -100px auto;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 132, 60, 0.24), transparent 64%);
+      pointer-events: none;
+    }
+
+    .hero__grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero h1,
+    .section-heading {
+      margin: 12px 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      max-width: 12ch;
+    }
+
+    .hero__lede {
+      max-width: 58ch;
+      margin: 0 0 26px;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .button--primary {
+      background: var(--surface-dark);
+      color: #fff;
+      box-shadow: 0 16px 28px rgba(24, 54, 66, 0.18);
+    }
+
+    .button--secondary {
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text);
+      border: 1px solid rgba(23, 49, 59, 0.12);
+    }
+
+    .hero-card {
+      display: grid;
+      gap: 16px;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 18px 40px rgba(24, 54, 66, 0.08);
+    }
+
+    .hero-card__image-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(180deg, rgba(24, 54, 66, 0.18), rgba(184, 132, 60, 0.14));
+    }
+
+    .hero-card__image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-card__caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+    }
+
+    .hero-card__caption strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+    }
+
+    .hero-card__caption span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      padding: 28px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      max-width: 12ch;
+    }
+
+    .section-intro {
+      max-width: 56ch;
+      margin: 0;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .quote-grid,
+    .card-grid,
+    .sponsor-grid,
+    .winner-grid,
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .quote-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .quote-card,
+    .info-card,
+    .sponsor-card,
+    .winner-card,
+    .contact-card,
+    .board-card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      box-shadow: 0 16px 35px rgba(24, 54, 66, 0.08);
+    }
+
+    .quote-card {
+      min-height: 100%;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 242, 0.95), rgba(244, 233, 214, 0.88));
+    }
+
+    .quote-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--accent-deep);
+      letter-spacing: 0.08em;
+      font-size: 0.92rem;
+    }
+
+    .quote-card p {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      line-height: 1.45;
+    }
+
+    .about-layout,
+    .tournament-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .info-card p,
+    .info-card li,
+    .winner-card li,
+    .sponsor-card li,
+    .contact-card p,
+    .board-card p {
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .info-card p:first-child {
+      margin-top: 0;
+    }
+
+    .info-card p:last-child,
+    .contact-card p:last-child,
+    .board-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .photo-frame {
+      overflow: hidden;
+      border-radius: 30px;
+      min-height: 100%;
+      background: #e2d5c2;
+      box-shadow: var(--shadow);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(24, 54, 66, 0.06);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.6rem;
+      font-family: Georgia, "Times New Roman", serif;
+      margin-bottom: 6px;
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .board-card h3,
+    .sponsor-card h3,
+    .winner-card h3,
+    .contact-card h3,
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .board-card span {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--accent-deep);
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .sponsor-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .sponsor-card ul,
+    .winner-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .winner-grid,
+    .contact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tournament-visual {
+      display: grid;
+      gap: 18px;
+    }
+
+    .tournament-visual .photo-frame {
+      min-height: 360px;
+    }
+
+    .footer {
+      padding: 18px 0 42px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .hero__grid,
+      .about-layout,
+      .tournament-layout,
+      .quote-grid,
+      .card-grid,
+      .sponsor-grid,
+      .winner-grid,
+      .contact-grid,
+      .stats-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero h1,
+      .section-heading {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .site-header__inner {
+        align-items: flex-start;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .site-nav {
+        display: none;
+        width: 100%;
+        padding-top: 8px;
+      }
+
+      .site-nav.is-open {
+        display: flex;
+      }
+
+      .site-nav a {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.64);
+      }
+
+      .hero__panel {
+        padding: 28px;
+      }
+
+      .hero__grid,
+      .about-layout,
+      .tournament-layout,
+      .quote-grid,
+      .card-grid,
+      .sponsor-grid,
+      .winner-grid,
+      .contact-grid,
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="#top" aria-label="Michael J. Mulrenan Scholarship home">
+        <img class="brand__logo" src="mjm_logo.png" alt="Michael J. Mulrenan Scholarship logo">
+        <div>
+          <p class="brand__eyebrow">Family. Education. Community.</p>
+          <p class="brand__title">Michael J. Mulrenan Scholarship</p>
+        </div>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="#about">About Michael</a>
+        <a href="#scholarship">Scholarship</a>
+        <a href="#board">Board</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#tournament">Tournament</a>
+        <a href="#winners">Winners</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="page-shell">
+        <div class="hero__panel">
+          <div class="hero__grid">
+            <div>
+              <p class="section-label">Honoring a life of service</p>
+              <h1>Building opportunity through family and community.</h1>
+              <p class="hero__lede">
+                The Michael J. Mulrenan Scholarship celebrates Michael's belief in education,
+                giving back, and showing up for others. This scholarship supports the children
+                of Woburn-Stoneham Elks Club members as they take the next step toward college.
+              </p>
+              <div class="button-row">
+                <a class="button button--primary" href="#scholarship">View Scholarship Details</a>
+                <a class="button button--secondary" href="#about">Read Michael's Story</a>
+              </div>
+            </div>
+
+            <aside class="hero-card">
+              <div class="hero-card__image-wrap">
+                <img src="micheal_headshot.jpg" alt="Portrait of Michael Mulrenan">
+              </div>
+              <div class="hero-card__caption">
+                <strong>Michael Mulrenan</strong>
+                <span>Remembered through generosity, leadership, and local impact.</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="page-shell">
+        <div class="quote-grid">
+          <article class="quote-card">
+            <strong>"GET INVOLVED"</strong>
+            <p>Be part of something bigger than yourself.</p>
+          </article>
+          <article class="quote-card">
+            <strong>"GIVE BACK"</strong>
+            <p>Because, in life, it's about what you give not what you get.</p>
+          </article>
+          <article class="quote-card">
+            <strong>"MAKE A DIFFERENCE"</strong>
+            <p>To enrich the lives of our kids and the entire community.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="page-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-label">About Michael</p>
+            <h2 class="section-heading">A story rooted in hard work, humility, and service.</h2>
+          </div>
+          <p class="section-intro">
+            This scholarship exists to continue the kind of impact Michael made throughout his
+            life: helping people, investing in his community, and opening doors for the next generation.
+          </p>
+        </div>
+
+        <div class="about-layout">
+          <article class="info-card">
+            <p>
+              Michael Mulrenan came from humble beginnings. His dad passed away at an early age,
+              leaving his mom to raise nine kids on her own. Although they didn't have much, they
+              had each other and a strong work ethic. That combination gave them the confidence
+              they needed to pursue their dreams.
+            </p>
+            <p>
+              Michael's dream was to go to college, as he felt a postsecondary education was the key
+              to new opportunities. Soon after graduating from Boston University with a master's degree
+              in physical therapy, he opened an outpatient clinic specializing in orthopedics and sports
+              medicine. He proved to be a successful entrepreneur when one clinic multiplied into
+              forty-four over time.
+            </p>
+            <p>
+              Even with all this success, he never forgot where he came from and who helped him along
+              the way. This humility prompted him to give back to his community whenever he could. In
+              particular, he dedicated a lot of time to the Woburn-Stoneham Elks Lodge where he'd been
+              a proud member for nearly thirty years.
+            </p>
+            <p>
+              In addition to posthumously receiving the Elks Distinguished Citizenship Award, Michael
+              served as Trustee on the Board of Directors, initiated the 908 Cigar Room, and planned
+              and managed the renovations of the Elks building including the extensive handicap project.
+            </p>
+
+            <div class="stats-row">
+              <div class="stat-card">
+                <strong>30 years</strong>
+                <span>Proud member of the Woburn-Stoneham Elks Lodge</span>
+              </div>
+              <div class="stat-card">
+                <strong>44 clinics</strong>
+                <span>Built from one orthopedic and sports medicine practice</span>
+              </div>
+              <div class="stat-card">
+                <strong>1 legacy</strong>
+                <span>Carried forward through education, generosity, and community care</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="photo-frame">
+            <img src="micheal_headshot.jpg" alt="Michael Mulrenan smiling in a headshot portrait">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scholarship">
+      <div class="page-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Scholarship Details</p>
+            <h2 class="section-heading">Supporting students who are ready for what's next.</h2>
+          </div>
+          <p class="section-intro">
+            This section can later be expanded with application steps, deadlines, and eligibility requirements.
+            For now, it introduces the scholarship and highlights the fundraiser that makes it possible.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <article class="info-card">
+            <h3>2025 Tournament Impact</h3>
+            <p>
+              The 3rd Annual Golf Tournament in 2025 raised over $XX,XXX thanks to the outpouring
+              of support and generous sponsors.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Scholarship Award</h3>
+            <p>
+              The Michael J. Mulrenan Scholarship in the amount of $10,000 will be awarded on
+              <strong>SCHOLARSHIP DATE</strong> at the Woburn-Stoneham Elks Scholarship Night.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Who This Honors</h3>
+            <p>
+              Every contribution and every event helps continue Michael's belief that education and
+              community support can create real opportunities for young people.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="board">
+      <div class="page-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Board of Directors</p>
+            <h2 class="section-heading">A team carrying the scholarship forward.</h2>
+          </div>
+          <p class="section-intro">
+            These are placeholder entries for now. When you have the real names, titles, and photos,
+            we can swap them in very easily.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <article class="board-card">
+            <h3>Board Member 1</h3>
+            <span>Position 1</span>
+            <p>Short bio or introduction can go here once the board information is finalized.</p>
+          </article>
+          <article class="board-card">
+            <h3>Board Member 2</h3>
+            <span>Position 2</span>
+            <p>Short bio or introduction can go here once the board information is finalized.</p>
+          </article>
+          <article class="board-card">
+            <h3>Board Member 3</h3>
+            <span>Position 3</span>
+            <p>Short bio or introduction can go here once the board information is finalized.</p>
+          </article>
+          <article class="board-card">
+            <h3>Board Member 4</h3>
+            <span>Position 4</span>
+            <p>Short bio or introduction can go here once the board information is finalized.</p>
+          </article>
+          <article class="board-card">
+            <h3>Board Member 5</h3>
+            <span>Position 5</span>
+            <p>Short bio or introduction can go here once the board information is finalized.</p>
+          </article>
+          <article class="board-card">
+            <h3>Board Member 6</h3>
+            <span>Position 6</span>
+            <p>Short bio or introduction can go here once the board information is finalized.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sponsors">
+      <div class="page-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Sponsors and Donors</p>
+            <h2 class="section-heading">Community support that powers the tournament.</h2>
+          </div>
+          <p class="section-intro">
+            This first version uses example sponsor names grouped by level. Later, we can add logos,
+            links, and photos from the event.
+          </p>
+        </div>
+
+        <div class="sponsor-grid">
+          <article class="sponsor-card">
+            <h3>Tournament Sponsors</h3>
+            <ul>
+              <li>Tournament Sponsor 1</li>
+              <li>Tournament Sponsor 2</li>
+            </ul>
+          </article>
+          <article class="sponsor-card">
+            <h3>Gold Sponsors</h3>
+            <ul>
+              <li>Gold Sponsor 1</li>
+              <li>Gold Sponsor 2</li>
+            </ul>
+          </article>
+          <article class="sponsor-card">
+            <h3>Silver Sponsors</h3>
+            <ul>
+              <li>Silver Sponsor 1</li>
+              <li>Silver Sponsor 2</li>
+            </ul>
+          </article>
+          <article class="sponsor-card">
+            <h3>Bronze Sponsors</h3>
+            <ul>
+              <li>Bronze Sponsor 1</li>
+              <li>Bronze Sponsor 2</li>
+            </ul>
+          </article>
+          <article class="sponsor-card">
+            <h3>Tee Box Sponsors</h3>
+            <ul>
+              <li>Tee Box Sponsor 1</li>
+              <li>Tee Box Sponsor 2</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tournament">
+      <div class="page-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Golf Tournament</p>
+            <h2 class="section-heading">The main fundraiser behind the scholarship.</h2>
+          </div>
+          <p class="section-intro">
+            This area combines the annual event story, photos, and a simple winner list. As you collect
+            more tournament images over time, we can turn this into a stronger gallery section.
+          </p>
+        </div>
+
+        <div class="tournament-layout">
+          <article class="info-card">
+            <h3>About the Event</h3>
+            <p>
+              The annual golf tournament brings family, friends, sponsors, and the wider community together
+              to celebrate Michael's legacy and raise money for future scholarship recipients.
+            </p>
+            <h3>Tournament Winners</h3>
+            <ul>
+              <li>Golf Winner 2023</li>
+              <li>Golf Winner 2024</li>
+              <li>Golf Winner 2025</li>
+            </ul>
+          </article>
+
+          <div class="tournament-visual">
+            <div class="photo-frame">
+              <img src="amy_and_kids.png" alt="Family photo from the Michael J. Mulrenan Scholarship golf tournament">
+            </div>
+            <article class="info-card">
+              <h3>Photo Gallery</h3>
+              <p>
+                This first draft uses the tournament photo currently available. Additional pictures from
+                the event can be added here later to create a fuller gallery of the day.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="winners">
+      <div class="page-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Past Winners</p>
+            <h2 class="section-heading">Recognizing the students this scholarship supports.</h2>
+          </div>
+          <p class="section-intro">
+            This can stay simple or later grow into full student spotlights with schools, majors, and photos.
+          </p>
+        </div>
+
+        <div class="winner-grid">
+          <article class="winner-card">
+            <h3>Scholarship Recipients</h3>
+            <ul>
+              <li>Scholarship Winner 2023</li>
+              <li>Scholarship Winner 2024</li>
+              <li>Scholarship Winner 2025</li>
+            </ul>
+          </article>
+          <article class="winner-card">
+            <h3>What's Next</h3>
+            <ul>
+              <li>Add real names and years</li>
+              <li>Include schools if desired</li>
+              <li>Feature photos or short student bios later</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="page-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Contact</p>
+            <h2 class="section-heading">Questions, support, or ways to get involved.</h2>
+          </div>
+          <p class="section-intro">
+            For now, this is a simple contact section. If you want later, we can add donation information,
+            sponsor inquiries, or a proper contact form.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card">
+            <h3>Email</h3>
+            <p><a href="mailto:example@example.com">example@example.com</a></p>
+          </article>
+          <article class="contact-card">
+            <h3>Get Involved</h3>
+            <p>
+              Future versions of the site can include sponsorship details, golf registration information,
+              donation options, and board contact information.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer page-shell">
+    <p>Michael J. Mulrenan Scholarship • Honoring a legacy of education, generosity, and community</p>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const siteNav = document.querySelector(".site-nav");
+
+    if (navToggle && siteNav) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = siteNav.classList.toggle("is-open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+    }
+  </script>
+</body>
+</html>
