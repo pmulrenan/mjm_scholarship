@@ -73,7 +73,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
       padding: 16px 0;
     }
 
@@ -82,6 +82,7 @@
       align-items: center;
       gap: 14px;
       min-width: 0;
+      flex: 0 1 auto;
     }
 
     .brand__logo {
@@ -124,22 +125,39 @@
 
     .site-nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-wrap: nowrap;
+      gap: 6px;
       justify-content: flex-end;
+      align-items: center;
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .site-nav a {
-      padding: 10px 14px;
+      padding: 9px 10px;
       border-radius: 999px;
       color: var(--muted);
       transition: 0.2s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+      line-height: 1.15;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .site-nav a:hover,
-    .site-nav a:focus-visible {
+    .site-nav a:focus-visible,
+    .site-nav a.is-active {
       background: rgba(255, 250, 242, 0.9);
       color: var(--text);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.is-active {
+      display: block;
     }
 
     .hero {
@@ -285,9 +303,19 @@
       margin-bottom: 24px;
     }
 
+    .section-header__content {
+      flex: 0 1 50%;
+      max-width: 50%;
+      min-width: 0;
+    }
+
     .section-heading {
       font-size: clamp(2rem, 4vw, 3.25rem);
       max-width: 12ch;
+    }
+
+    .section-header__content .section-heading {
+      max-width: 18ch;
     }
 
     .section-intro {
@@ -295,6 +323,23 @@
       margin: 0;
       line-height: 1.7;
       color: var(--muted);
+    }
+
+    .section-header__logo {
+      width: clamp(170px, 16vw, 230px);
+      aspect-ratio: 1;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+      margin-top: -6px;
+    }
+
+    .section-header__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .quote-grid,
@@ -431,6 +476,137 @@
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
+    .donor-archive {
+      display: grid;
+      gap: 18px;
+    }
+
+    .donor-year {
+      background: rgba(255, 252, 246, 0.9);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.56);
+      box-shadow: 0 16px 35px rgba(24, 54, 66, 0.08);
+      overflow: hidden;
+    }
+
+    .donor-year[open] {
+      background:
+        linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(244, 233, 214, 0.9));
+    }
+
+    .donor-year__summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 24px;
+      cursor: pointer;
+    }
+
+    .donor-year__summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .donor-year__summary h3,
+    .donor-tier-card__header h4 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .donor-year__summary h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .donor-year__eyebrow {
+      margin: 0 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .donor-year__meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .donor-year__chevron {
+      width: 14px;
+      height: 14px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
+      margin-top: -4px;
+    }
+
+    .donor-year[open] .donor-year__chevron {
+      transform: rotate(225deg);
+      margin-top: 4px;
+    }
+
+    .donor-year__content {
+      padding: 0 24px 24px;
+    }
+
+    .donor-tier-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .donor-tier-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      border: 1px solid rgba(23, 49, 59, 0.08);
+    }
+
+    .donor-tier-card--full {
+      grid-column: 1 / -1;
+    }
+
+    .donor-tier-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .donor-tier-card__header span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(184, 132, 60, 0.14);
+      color: var(--accent-deep);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .donor-list {
+      margin: 0;
+      padding-left: 18px;
+      columns: 2;
+      column-gap: 24px;
+    }
+
+    .donor-list li {
+      break-inside: avoid;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+
     .sponsor-card ul,
     .winner-card ul {
       margin: 14px 0 0;
@@ -458,12 +634,22 @@
     }
 
     @media (max-width: 1080px) {
+      .brand__title {
+        font-size: 0.94rem;
+      }
+
+      .site-nav a {
+        padding: 8px 8px;
+        font-size: 0.82rem;
+      }
+
       .hero__grid,
       .about-layout,
       .tournament-layout,
       .quote-grid,
       .card-grid,
       .sponsor-grid,
+      .donor-tier-grid,
       .winner-grid,
       .contact-grid,
       .stats-row {
@@ -510,6 +696,7 @@
       .quote-grid,
       .card-grid,
       .sponsor-grid,
+      .donor-tier-grid,
       .winner-grid,
       .contact-grid,
       .stats-row {
@@ -520,13 +707,37 @@
         align-items: start;
         flex-direction: column;
       }
+
+      .section-header__logo {
+        width: 140px;
+        margin-top: 0;
+      }
+
+      .donor-year__summary {
+        padding: 20px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .donor-year__meta {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .donor-year__content {
+        padding: 0 20px 20px;
+      }
+
+      .donor-list {
+        columns: 1;
+      }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="page-shell site-header__inner">
-      <a class="brand" href="#top" aria-label="Michael J. Mulrenan Scholarship home">
+      <a class="brand" href="#home" aria-label="Michael J. Mulrenan Scholarship home" data-tab-trigger="home">
         <img class="brand__logo" src="mjm_logo.png" alt="Michael J. Mulrenan Scholarship logo">
         <div>
           <p class="brand__eyebrow">Family. Education. Community.</p>
@@ -539,80 +750,82 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <a href="#about">About Michael</a>
-        <a href="#scholarship">Scholarship</a>
-        <a href="#board">Board</a>
-        <a href="#sponsors">Sponsors</a>
-        <a href="#tournament">Tournament</a>
-        <a href="#winners">Winners</a>
-        <a href="#contact">Contact</a>
+        <a href="#home" data-tab-trigger="home" class="is-active">Home</a>
+        <a href="#about" data-tab-trigger="about">About Michael</a>
+        <a href="#scholarship" data-tab-trigger="scholarship">Scholarship Details</a>
+        <a href="#sponsors" data-tab-trigger="sponsors">Sponsors and Donors</a>
+        <a href="#tournament" data-tab-trigger="tournament">Golf Tournament</a>
+        <a href="#board" data-tab-trigger="board">Board of Directors</a>
+        <a href="#contact" data-tab-trigger="contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="page-shell">
-        <div class="hero__panel">
-          <div class="hero__grid">
-            <div>
-              <p class="section-label">Honoring a life of service</p>
-              <h1>Building opportunity through family and community.</h1>
-              <p class="hero__lede">
-                The Michael J. Mulrenan Scholarship celebrates Michael's belief in education,
-                giving back, and showing up for others. This scholarship supports the children
-                of Woburn-Stoneham Elks Club members as they take the next step toward college.
-              </p>
-              <div class="button-row">
-                <a class="button button--primary" href="#scholarship">View Scholarship Details</a>
-                <a class="button button--secondary" href="#about">Read Michael's Story</a>
+    <section class="tab-panel is-active" id="home" data-tab-panel="home">
+      <section class="hero">
+        <div class="page-shell">
+          <div class="hero__panel">
+            <div class="hero__grid">
+              <div>
+                <p class="section-label">Honoring a life of service</p>
+                <h1>Building opportunity through family and community.</h1>
+                <p class="hero__lede">
+                  The Michael J. Mulrenan Scholarship celebrates Michael's belief in education,
+                  giving back, and showing up for others. This scholarship supports the children
+                  of Woburn-Stoneham Elks Lodge members as they take the next step toward college.
+                </p>
+                <div class="button-row">
+                  <a class="button button--primary" href="#scholarship" data-tab-trigger="scholarship">View Scholarship Details</a>
+                  <a class="button button--secondary" href="#about" data-tab-trigger="about">Read Michael's Story</a>
+                </div>
               </div>
-            </div>
 
-            <aside class="hero-card">
-              <div class="hero-card__image-wrap">
-                <img src="micheal_headshot.jpg" alt="Portrait of Michael Mulrenan">
-              </div>
-              <div class="hero-card__caption">
-                <strong>Michael Mulrenan</strong>
-                <span>Remembered through generosity, leadership, and local impact.</span>
-              </div>
-            </aside>
+              <aside class="hero-card">
+                <div class="hero-card__image-wrap">
+                  <img src="micheal_headshot.jpg" alt="Portrait of Michael Mulrenan">
+                </div>
+                <div class="hero-card__caption">
+                  <strong>Michael Mulrenan</strong>
+                  <span>Remembered through generosity, leadership, and local impact.</span>
+                </div>
+              </aside>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section class="section">
+        <div class="page-shell">
+          <div class="quote-grid">
+            <article class="quote-card">
+              <strong>"GET INVOLVED"</strong>
+              <p>Be part of something bigger than yourself.</p>
+            </article>
+            <article class="quote-card">
+              <strong>"GIVE BACK"</strong>
+              <p>Because, in life, it's about what you give, not what you get.</p>
+            </article>
+            <article class="quote-card">
+              <strong>"MAKE A DIFFERENCE"</strong>
+              <p>To enrich the lives of our kids and the entire community.</p>
+            </article>
+          </div>
+        </div>
+      </section>
     </section>
 
+    <section class="tab-panel" id="about" data-tab-panel="about">
     <section class="section">
       <div class="page-shell">
-        <div class="quote-grid">
-          <article class="quote-card">
-            <strong>"GET INVOLVED"</strong>
-            <p>Be part of something bigger than yourself.</p>
-          </article>
-          <article class="quote-card">
-            <strong>"GIVE BACK"</strong>
-            <p>Because, in life, it's about what you give, not what you get.</p>
-          </article>
-          <article class="quote-card">
-            <strong>"MAKE A DIFFERENCE"</strong>
-            <p>To enrich the lives of our kids and the entire community.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="page-shell">
         <div class="section-header">
-          <div>
+          <div class="section-header__content">
             <p class="section-label">About Michael</p>
             <h2 class="section-heading">A story rooted in hard work, humility, and service.</h2>
           </div>
-          <p class="section-intro">
-            This scholarship exists to continue the kind of impact Michael made throughout his
-            life: helping people, investing in his community, and opening doors for the next generation.
-          </p>
+          <div class="section-header__logo" aria-hidden="true">
+            <img src="mjm_logo.png" alt="">
+          </div>
         </div>
 
         <div class="about-layout">
@@ -664,25 +877,26 @@
         </div>
       </div>
     </section>
+    </section>
 
-    <section class="section" id="scholarship">
+    <section class="tab-panel" id="scholarship" data-tab-panel="scholarship">
+    <section class="section">
       <div class="page-shell">
         <div class="section-header">
-          <div>
+          <div class="section-header__content">
             <p class="section-label">Scholarship Details</p>
             <h2 class="section-heading">Supporting students who are ready for what's next.</h2>
           </div>
-          <p class="section-intro">
-            This section can later be expanded with application steps, deadlines, and eligibility requirements.
-            For now, it introduces the scholarship and highlights the fundraiser that makes it possible.
-          </p>
+          <div class="section-header__logo" aria-hidden="true">
+            <img src="mjm_logo.png" alt="">
+          </div>
         </div>
 
         <div class="card-grid">
           <article class="info-card">
             <h3>2025 Tournament Impact</h3>
             <p>
-              The 3rd Annual Golf Tournament in 2025 raised over $XX,XXX thanks to the outpouring
+              The 3rd Annual Golf Tournament in 2025 raised over $$$$ thanks to the outpouring
               of support and generous sponsors.
             </p>
           </article>
@@ -696,25 +910,598 @@
           <article class="info-card">
             <h3>Who This Honors</h3>
             <p>
-              Every contribution and every event helps continue Michael's belief that education and
-              community support can create real opportunities for young people.
+              This scholarship honors Michael's commitment to education and community by helping pay
+              college tuition for a child of a member of the Woburn-Stoneham Elks Lodge.
             </p>
           </article>
         </div>
+
+        <section class="section">
+          <div class="section-header">
+            <div class="section-header__content">
+              <p class="section-label">Past Winners</p>
+              <h2 class="section-heading">Recognizing the students this scholarship supports.</h2>
+            </div>
+          </div>
+
+          <div class="winner-grid">
+            <article class="winner-card">
+              <h3>Scholarship Recipients</h3>
+              <ul>
+                <li><strong>2024:</strong> Isabella Shaw (Northeastern University)</li>
+                <li><strong>2025:</strong> Abigail Manzella (UMass Lowel)</li>
+              </ul>
+            </article>
+            <article class="winner-card">
+              <h3>What's Next</h3>
+              <ul>
+                <li>Add real names and years</li>
+                <li>Include schools if desired</li>
+                <li>Feature photos or short student bios later</li>
+              </ul>
+            </article>
+          </div>
+        </section>
       </div>
     </section>
+    </section>
 
-    <section class="section" id="board">
+    <section class="tab-panel" id="sponsors" data-tab-panel="sponsors">
+    <section class="section">
       <div class="page-shell">
         <div class="section-header">
-          <div>
+          <div class="section-header__content">
+            <p class="section-label">Sponsors and Donors</p>
+            <h2 class="section-heading">Community support that powers the tournament.</h2>
+          </div>
+          <div class="section-header__logo" aria-hidden="true">
+            <img src="mjm_logo.png" alt="">
+          </div>
+        </div>
+
+        <div class="donor-archive">
+          <details class="donor-year" open>
+            <summary class="donor-year__summary">
+              <div>
+                <p class="donor-year__eyebrow">Donors from</p>
+                <h3>2025</h3>
+              </div>
+              <div class="donor-year__meta">
+                <span>101 supporters</span>
+                <span class="donor-year__chevron" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="donor-year__content">
+              <div class="donor-tier-grid">
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Tournament Sponsors</h4>
+                    <span>1</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 3</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Gold Sponsors</h4>
+                    <span>2</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 8</li>
+                    <li>Sponsor 9</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Silver Sponsors</h4>
+                    <span>8</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 25</li>
+                    <li>Sponsor 26</li>
+                    <li>Sponsor 27</li>
+                    <li>Sponsor 28</li>
+                    <li>Sponsor 29</li>
+                    <li>Sponsor 30</li>
+                    <li>Sponsor 31</li>
+                    <li>Sponsor 32</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Bronze Sponsors</h4>
+                    <span>10</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 56</li>
+                    <li>Sponsor 57</li>
+                    <li>Sponsor 58</li>
+                    <li>Sponsor 59</li>
+                    <li>Sponsor 60</li>
+                    <li>Sponsor 61</li>
+                    <li>Sponsor 62</li>
+                    <li>Sponsor 63</li>
+                    <li>Sponsor 64</li>
+                    <li>Sponsor 65</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card donor-tier-card--full">
+                  <div class="donor-tier-card__header">
+                    <h4>Tee Box Sponsors</h4>
+                    <span>80</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 231</li>
+                    <li>Sponsor 232</li>
+                    <li>Sponsor 233</li>
+                    <li>Sponsor 234</li>
+                    <li>Sponsor 235</li>
+                    <li>Sponsor 236</li>
+                    <li>Sponsor 237</li>
+                    <li>Sponsor 238</li>
+                    <li>Sponsor 239</li>
+                    <li>Sponsor 240</li>
+                    <li>Sponsor 241</li>
+                    <li>Sponsor 242</li>
+                    <li>Sponsor 243</li>
+                    <li>Sponsor 244</li>
+                    <li>Sponsor 245</li>
+                    <li>Sponsor 246</li>
+                    <li>Sponsor 247</li>
+                    <li>Sponsor 248</li>
+                    <li>Sponsor 249</li>
+                    <li>Sponsor 250</li>
+                    <li>Sponsor 251</li>
+                    <li>Sponsor 252</li>
+                    <li>Sponsor 253</li>
+                    <li>Sponsor 254</li>
+                    <li>Sponsor 255</li>
+                    <li>Sponsor 256</li>
+                    <li>Sponsor 257</li>
+                    <li>Sponsor 258</li>
+                    <li>Sponsor 259</li>
+                    <li>Sponsor 260</li>
+                    <li>Sponsor 261</li>
+                    <li>Sponsor 262</li>
+                    <li>Sponsor 263</li>
+                    <li>Sponsor 264</li>
+                    <li>Sponsor 265</li>
+                    <li>Sponsor 266</li>
+                    <li>Sponsor 267</li>
+                    <li>Sponsor 268</li>
+                    <li>Sponsor 269</li>
+                    <li>Sponsor 270</li>
+                    <li>Sponsor 271</li>
+                    <li>Sponsor 272</li>
+                    <li>Sponsor 273</li>
+                    <li>Sponsor 274</li>
+                    <li>Sponsor 275</li>
+                    <li>Sponsor 276</li>
+                    <li>Sponsor 277</li>
+                    <li>Sponsor 278</li>
+                    <li>Sponsor 279</li>
+                    <li>Sponsor 280</li>
+                    <li>Sponsor 281</li>
+                    <li>Sponsor 282</li>
+                    <li>Sponsor 283</li>
+                    <li>Sponsor 284</li>
+                    <li>Sponsor 285</li>
+                    <li>Sponsor 286</li>
+                    <li>Sponsor 287</li>
+                    <li>Sponsor 288</li>
+                    <li>Sponsor 289</li>
+                    <li>Sponsor 290</li>
+                    <li>Sponsor 291</li>
+                    <li>Sponsor 292</li>
+                    <li>Sponsor 293</li>
+                    <li>Sponsor 294</li>
+                    <li>Sponsor 295</li>
+                    <li>Sponsor 296</li>
+                    <li>Sponsor 297</li>
+                    <li>Sponsor 298</li>
+                    <li>Sponsor 299</li>
+                    <li>Sponsor 300</li>
+                    <li>Sponsor 301</li>
+                    <li>Sponsor 302</li>
+                    <li>Sponsor 303</li>
+                    <li>Sponsor 304</li>
+                    <li>Sponsor 305</li>
+                    <li>Sponsor 306</li>
+                    <li>Sponsor 307</li>
+                    <li>Sponsor 308</li>
+                    <li>Sponsor 309</li>
+                    <li>Sponsor 310</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <details class="donor-year">
+            <summary class="donor-year__summary">
+              <div>
+                <p class="donor-year__eyebrow">Donors from</p>
+                <h3>2024</h3>
+              </div>
+              <div class="donor-year__meta">
+                <span>104 supporters</span>
+                <span class="donor-year__chevron" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="donor-year__content">
+              <div class="donor-tier-grid">
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Tournament Sponsors</h4>
+                    <span>1</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 2</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Gold Sponsors</h4>
+                    <span>2</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 6</li>
+                    <li>Sponsor 7</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Silver Sponsors</h4>
+                    <span>8</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 17</li>
+                    <li>Sponsor 18</li>
+                    <li>Sponsor 19</li>
+                    <li>Sponsor 20</li>
+                    <li>Sponsor 21</li>
+                    <li>Sponsor 22</li>
+                    <li>Sponsor 23</li>
+                    <li>Sponsor 24</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Bronze Sponsors</h4>
+                    <span>11</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 45</li>
+                    <li>Sponsor 46</li>
+                    <li>Sponsor 47</li>
+                    <li>Sponsor 48</li>
+                    <li>Sponsor 49</li>
+                    <li>Sponsor 50</li>
+                    <li>Sponsor 51</li>
+                    <li>Sponsor 52</li>
+                    <li>Sponsor 53</li>
+                    <li>Sponsor 54</li>
+                    <li>Sponsor 55</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card donor-tier-card--full">
+                  <div class="donor-tier-card__header">
+                    <h4>Tee Box Sponsors</h4>
+                    <span>82</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 149</li>
+                    <li>Sponsor 150</li>
+                    <li>Sponsor 151</li>
+                    <li>Sponsor 152</li>
+                    <li>Sponsor 153</li>
+                    <li>Sponsor 154</li>
+                    <li>Sponsor 155</li>
+                    <li>Sponsor 156</li>
+                    <li>Sponsor 157</li>
+                    <li>Sponsor 158</li>
+                    <li>Sponsor 159</li>
+                    <li>Sponsor 160</li>
+                    <li>Sponsor 161</li>
+                    <li>Sponsor 162</li>
+                    <li>Sponsor 163</li>
+                    <li>Sponsor 164</li>
+                    <li>Sponsor 165</li>
+                    <li>Sponsor 166</li>
+                    <li>Sponsor 167</li>
+                    <li>Sponsor 168</li>
+                    <li>Sponsor 169</li>
+                    <li>Sponsor 170</li>
+                    <li>Sponsor 171</li>
+                    <li>Sponsor 172</li>
+                    <li>Sponsor 173</li>
+                    <li>Sponsor 174</li>
+                    <li>Sponsor 175</li>
+                    <li>Sponsor 176</li>
+                    <li>Sponsor 177</li>
+                    <li>Sponsor 178</li>
+                    <li>Sponsor 179</li>
+                    <li>Sponsor 180</li>
+                    <li>Sponsor 181</li>
+                    <li>Sponsor 182</li>
+                    <li>Sponsor 183</li>
+                    <li>Sponsor 184</li>
+                    <li>Sponsor 185</li>
+                    <li>Sponsor 186</li>
+                    <li>Sponsor 187</li>
+                    <li>Sponsor 188</li>
+                    <li>Sponsor 189</li>
+                    <li>Sponsor 190</li>
+                    <li>Sponsor 191</li>
+                    <li>Sponsor 192</li>
+                    <li>Sponsor 193</li>
+                    <li>Sponsor 194</li>
+                    <li>Sponsor 195</li>
+                    <li>Sponsor 196</li>
+                    <li>Sponsor 197</li>
+                    <li>Sponsor 198</li>
+                    <li>Sponsor 199</li>
+                    <li>Sponsor 200</li>
+                    <li>Sponsor 201</li>
+                    <li>Sponsor 202</li>
+                    <li>Sponsor 203</li>
+                    <li>Sponsor 204</li>
+                    <li>Sponsor 205</li>
+                    <li>Sponsor 206</li>
+                    <li>Sponsor 207</li>
+                    <li>Sponsor 208</li>
+                    <li>Sponsor 209</li>
+                    <li>Sponsor 210</li>
+                    <li>Sponsor 211</li>
+                    <li>Sponsor 212</li>
+                    <li>Sponsor 213</li>
+                    <li>Sponsor 214</li>
+                    <li>Sponsor 215</li>
+                    <li>Sponsor 216</li>
+                    <li>Sponsor 217</li>
+                    <li>Sponsor 218</li>
+                    <li>Sponsor 219</li>
+                    <li>Sponsor 220</li>
+                    <li>Sponsor 221</li>
+                    <li>Sponsor 222</li>
+                    <li>Sponsor 223</li>
+                    <li>Sponsor 224</li>
+                    <li>Sponsor 225</li>
+                    <li>Sponsor 226</li>
+                    <li>Sponsor 227</li>
+                    <li>Sponsor 228</li>
+                    <li>Sponsor 229</li>
+                    <li>Sponsor 230</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <details class="donor-year">
+            <summary class="donor-year__summary">
+              <div>
+                <p class="donor-year__eyebrow">Donors from</p>
+                <h3>2023</h3>
+              </div>
+              <div class="donor-year__meta">
+                <span>105 supporters</span>
+                <span class="donor-year__chevron" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="donor-year__content">
+              <div class="donor-tier-grid">
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Tournament Sponsors</h4>
+                    <span>1</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 1</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Gold Sponsors</h4>
+                    <span>2</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 4</li>
+                    <li>Sponsor 5</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Silver Sponsors</h4>
+                    <span>7</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 10</li>
+                    <li>Sponsor 11</li>
+                    <li>Sponsor 12</li>
+                    <li>Sponsor 13</li>
+                    <li>Sponsor 14</li>
+                    <li>Sponsor 15</li>
+                    <li>Sponsor 16</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card">
+                  <div class="donor-tier-card__header">
+                    <h4>Bronze Sponsors</h4>
+                    <span>12</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 33</li>
+                    <li>Sponsor 34</li>
+                    <li>Sponsor 35</li>
+                    <li>Sponsor 36</li>
+                    <li>Sponsor 37</li>
+                    <li>Sponsor 38</li>
+                    <li>Sponsor 39</li>
+                    <li>Sponsor 40</li>
+                    <li>Sponsor 41</li>
+                    <li>Sponsor 42</li>
+                    <li>Sponsor 43</li>
+                    <li>Sponsor 44</li>
+                  </ul>
+                </article>
+                <article class="donor-tier-card donor-tier-card--full">
+                  <div class="donor-tier-card__header">
+                    <h4>Tee Box Sponsors</h4>
+                    <span>83</span>
+                  </div>
+                  <ul class="donor-list">
+                    <li>Sponsor 66</li>
+                    <li>Sponsor 67</li>
+                    <li>Sponsor 68</li>
+                    <li>Sponsor 69</li>
+                    <li>Sponsor 70</li>
+                    <li>Sponsor 71</li>
+                    <li>Sponsor 72</li>
+                    <li>Sponsor 73</li>
+                    <li>Sponsor 74</li>
+                    <li>Sponsor 75</li>
+                    <li>Sponsor 76</li>
+                    <li>Sponsor 77</li>
+                    <li>Sponsor 78</li>
+                    <li>Sponsor 79</li>
+                    <li>Sponsor 80</li>
+                    <li>Sponsor 81</li>
+                    <li>Sponsor 82</li>
+                    <li>Sponsor 83</li>
+                    <li>Sponsor 84</li>
+                    <li>Sponsor 85</li>
+                    <li>Sponsor 86</li>
+                    <li>Sponsor 87</li>
+                    <li>Sponsor 88</li>
+                    <li>Sponsor 89</li>
+                    <li>Sponsor 90</li>
+                    <li>Sponsor 91</li>
+                    <li>Sponsor 92</li>
+                    <li>Sponsor 93</li>
+                    <li>Sponsor 94</li>
+                    <li>Sponsor 95</li>
+                    <li>Sponsor 96</li>
+                    <li>Sponsor 97</li>
+                    <li>Sponsor 98</li>
+                    <li>Sponsor 99</li>
+                    <li>Sponsor 100</li>
+                    <li>Sponsor 101</li>
+                    <li>Sponsor 102</li>
+                    <li>Sponsor 103</li>
+                    <li>Sponsor 104</li>
+                    <li>Sponsor 105</li>
+                    <li>Sponsor 106</li>
+                    <li>Sponsor 107</li>
+                    <li>Sponsor 108</li>
+                    <li>Sponsor 109</li>
+                    <li>Sponsor 110</li>
+                    <li>Sponsor 111</li>
+                    <li>Sponsor 112</li>
+                    <li>Sponsor 113</li>
+                    <li>Sponsor 114</li>
+                    <li>Sponsor 115</li>
+                    <li>Sponsor 116</li>
+                    <li>Sponsor 117</li>
+                    <li>Sponsor 118</li>
+                    <li>Sponsor 119</li>
+                    <li>Sponsor 120</li>
+                    <li>Sponsor 121</li>
+                    <li>Sponsor 122</li>
+                    <li>Sponsor 123</li>
+                    <li>Sponsor 124</li>
+                    <li>Sponsor 125</li>
+                    <li>Sponsor 126</li>
+                    <li>Sponsor 127</li>
+                    <li>Sponsor 128</li>
+                    <li>Sponsor 129</li>
+                    <li>Sponsor 130</li>
+                    <li>Sponsor 131</li>
+                    <li>Sponsor 132</li>
+                    <li>Sponsor 133</li>
+                    <li>Sponsor 134</li>
+                    <li>Sponsor 135</li>
+                    <li>Sponsor 136</li>
+                    <li>Sponsor 137</li>
+                    <li>Sponsor 138</li>
+                    <li>Sponsor 139</li>
+                    <li>Sponsor 140</li>
+                    <li>Sponsor 141</li>
+                    <li>Sponsor 142</li>
+                    <li>Sponsor 143</li>
+                    <li>Sponsor 144</li>
+                    <li>Sponsor 145</li>
+                    <li>Sponsor 146</li>
+                    <li>Sponsor 147</li>
+                    <li>Sponsor 148</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+    </section>
+
+    <section class="tab-panel" id="tournament" data-tab-panel="tournament">
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-header">
+          <div class="section-header__content">
+            <p class="section-label">Golf Tournament</p>
+            <h2 class="section-heading">The main fundraiser behind the scholarship.</h2>
+          </div>
+          <div class="section-header__logo" aria-hidden="true">
+            <img src="mjm_logo.png" alt="">
+          </div>
+        </div>
+
+        <div class="tournament-layout">
+          <article class="info-card">
+            <h3>About the Event</h3>
+            <p>
+              The annual golf tournament brings family, friends, sponsors, and the wider community together
+              to celebrate Michael's legacy and raise money for future scholarship recipients.
+              This year's tournament will be held on September 11, 2026 at Windham Country Club in Windham, NH.
+            </p>
+            <h3>Tournament Winners</h3>
+            <ul>
+              <li><strong>2023:</strong> Golf Winner 2023</li>
+              <li><strong>2024:</strong> Golf Winner 2024</li>
+              <li><strong>2025:</strong> Golf Winner 2025</li>
+            </ul>
+          </article>
+
+          <div class="tournament-visual">
+            <div class="photo-frame">
+              <img src="amy_and_kids.png" alt="Family photo from the Michael J. Mulrenan Scholarship golf tournament">
+            </div>
+            <article class="info-card">
+              <h3>Photo Gallery</h3>
+              <p>
+                This first draft uses the tournament photo currently available. Additional pictures from
+                the event can be added here later to create a fuller gallery of the day.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    </section>
+
+    <section class="tab-panel" id="board" data-tab-panel="board">
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-header">
+          <div class="section-header__content">
             <p class="section-label">Board of Directors</p>
             <h2 class="section-heading">A team carrying the scholarship forward.</h2>
           </div>
-          <p class="section-intro">
-            These are placeholder entries for now. When you have the real names, titles, and photos,
-            we can swap them in very easily.
-          </p>
+          <div class="section-header__logo" aria-hidden="true">
+            <img src="mjm_logo.png" alt="">
+          </div>
         </div>
 
         <div class="card-grid">
@@ -751,147 +1538,19 @@
         </div>
       </div>
     </section>
-
-    <section class="section" id="sponsors">
-      <div class="page-shell">
-        <div class="section-header">
-          <div>
-            <p class="section-label">Sponsors and Donors</p>
-            <h2 class="section-heading">Community support that powers the tournament.</h2>
-          </div>
-          <p class="section-intro">
-            This first version uses example sponsor names grouped by level. Later, we can add logos,
-            links, and photos from the event.
-          </p>
-        </div>
-
-        <div class="sponsor-grid">
-          <article class="sponsor-card">
-            <h3>Tournament Sponsors</h3>
-            <ul>
-              <li>Tournament Sponsor 1</li>
-              <li>Tournament Sponsor 2</li>
-            </ul>
-          </article>
-          <article class="sponsor-card">
-            <h3>Gold Sponsors</h3>
-            <ul>
-              <li>Gold Sponsor 1</li>
-              <li>Gold Sponsor 2</li>
-            </ul>
-          </article>
-          <article class="sponsor-card">
-            <h3>Silver Sponsors</h3>
-            <ul>
-              <li>Silver Sponsor 1</li>
-              <li>Silver Sponsor 2</li>
-            </ul>
-          </article>
-          <article class="sponsor-card">
-            <h3>Bronze Sponsors</h3>
-            <ul>
-              <li>Bronze Sponsor 1</li>
-              <li>Bronze Sponsor 2</li>
-            </ul>
-          </article>
-          <article class="sponsor-card">
-            <h3>Tee Box Sponsors</h3>
-            <ul>
-              <li>Tee Box Sponsor 1</li>
-              <li>Tee Box Sponsor 2</li>
-            </ul>
-          </article>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="tournament">
+    <section class="tab-panel" id="contact" data-tab-panel="contact">
+    <section class="section">
       <div class="page-shell">
         <div class="section-header">
-          <div>
-            <p class="section-label">Golf Tournament</p>
-            <h2 class="section-heading">The main fundraiser behind the scholarship.</h2>
-          </div>
-          <p class="section-intro">
-            This area combines the annual event story, photos, and a simple winner list. As you collect
-            more tournament images over time, we can turn this into a stronger gallery section.
-          </p>
-        </div>
-
-        <div class="tournament-layout">
-          <article class="info-card">
-            <h3>About the Event</h3>
-            <p>
-              The annual golf tournament brings family, friends, sponsors, and the wider community together
-              to celebrate Michael's legacy and raise money for future scholarship recipients.
-            </p>
-            <h3>Tournament Winners</h3>
-            <ul>
-              <li>Golf Winner 2023</li>
-              <li>Golf Winner 2024</li>
-              <li>Golf Winner 2025</li>
-            </ul>
-          </article>
-
-          <div class="tournament-visual">
-            <div class="photo-frame">
-              <img src="amy_and_kids.png" alt="Family photo from the Michael J. Mulrenan Scholarship golf tournament">
-            </div>
-            <article class="info-card">
-              <h3>Photo Gallery</h3>
-              <p>
-                This first draft uses the tournament photo currently available. Additional pictures from
-                the event can be added here later to create a fuller gallery of the day.
-              </p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="winners">
-      <div class="page-shell">
-        <div class="section-header">
-          <div>
-            <p class="section-label">Past Winners</p>
-            <h2 class="section-heading">Recognizing the students this scholarship supports.</h2>
-          </div>
-          <p class="section-intro">
-            This can stay simple or later grow into full student spotlights with schools, majors, and photos.
-          </p>
-        </div>
-
-        <div class="winner-grid">
-          <article class="winner-card">
-            <h3>Scholarship Recipients</h3>
-            <ul>
-              <li>2024: Isabella Shaw (Northeastern University)</li>
-              <li>2025: Abigail Manzella (UMass Lowel)</li>
-            </ul>
-          </article>
-          <article class="winner-card">
-            <h3>What's Next</h3>
-            <ul>
-              <li>Add real names and years</li>
-              <li>Include schools if desired</li>
-              <li>Feature photos or short student bios later</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="page-shell">
-        <div class="section-header">
-          <div>
+          <div class="section-header__content">
             <p class="section-label">Contact</p>
             <h2 class="section-heading">Questions, support, or ways to get involved.</h2>
           </div>
-          <p class="section-intro">
-            For now, this is a simple contact section. If you want later, we can add donation information,
-            sponsor inquiries, or a proper contact form.
-          </p>
+          <div class="section-header__logo" aria-hidden="true">
+            <img src="mjm_logo.png" alt="">
+          </div>
         </div>
 
         <div class="contact-grid">
@@ -909,6 +1568,7 @@
         </div>
       </div>
     </section>
+    </section>
   </main>
 
   <footer class="footer page-shell">
@@ -918,12 +1578,71 @@
   <script>
     const navToggle = document.querySelector(".nav-toggle");
     const siteNav = document.querySelector(".site-nav");
+    const siteHeader = document.querySelector(".site-header");
+    const tabTriggers = document.querySelectorAll("[data-tab-trigger]");
+    const tabPanels = document.querySelectorAll("[data-tab-panel]");
 
     if (navToggle && siteNav) {
       navToggle.addEventListener("click", () => {
         const isOpen = siteNav.classList.toggle("is-open");
         navToggle.setAttribute("aria-expanded", String(isOpen));
       });
+    }
+
+    const showTab = (tabId, options = {}) => {
+      const { updateHistory = true, smooth = true } = options;
+      let activePanel = null;
+
+      tabPanels.forEach((panel) => {
+        const isActive = panel.dataset.tabPanel === tabId;
+        panel.classList.toggle("is-active", isActive);
+
+        if (isActive) {
+          activePanel = panel;
+        }
+      });
+
+      tabTriggers.forEach((trigger) => {
+        trigger.classList.toggle("is-active", trigger.dataset.tabTrigger === tabId);
+      });
+
+      if (updateHistory) {
+        window.history.replaceState(null, "", `#${tabId}`);
+      }
+
+      if (activePanel) {
+        const headerHeight = siteHeader ? siteHeader.offsetHeight : 0;
+        const panelTop = activePanel.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+        window.scrollTo({
+          top: Math.max(panelTop, 0),
+          behavior: smooth ? "smooth" : "auto"
+        });
+      }
+
+      if (siteNav && siteNav.classList.contains("is-open")) {
+        siteNav.classList.remove("is-open");
+        navToggle?.setAttribute("aria-expanded", "false");
+      }
+    };
+
+    tabTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        const tabId = trigger.dataset.tabTrigger;
+
+        if (!tabId) {
+          return;
+        }
+
+        event.preventDefault();
+        showTab(tabId);
+      });
+    });
+
+    const initialTab = window.location.hash.replace("#", "");
+
+    if ([...tabPanels].some((panel) => panel.dataset.tabPanel === initialTab)) {
+      showTab(initialTab, { updateHistory: false, smooth: false });
     }
   </script>
 </body>
