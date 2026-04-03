@@ -618,6 +618,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .winner-card--full {
+      grid-column: 1 / -1;
+    }
+
     .tournament-visual {
       display: grid;
       gap: 18px;
@@ -925,19 +929,11 @@
           </div>
 
           <div class="winner-grid">
-            <article class="winner-card">
+            <article class="winner-card winner-card--full">
               <h3>Scholarship Recipients</h3>
               <ul>
                 <li><strong>2024:</strong> Isabella Shaw (Northeastern University)</li>
                 <li><strong>2025:</strong> Abigail Manzella (UMass Lowel)</li>
-              </ul>
-            </article>
-            <article class="winner-card">
-              <h3>What's Next</h3>
-              <ul>
-                <li>Add real names and years</li>
-                <li>Include schools if desired</li>
-                <li>Feature photos or short student bios later</li>
               </ul>
             </article>
           </div>
@@ -1481,8 +1477,7 @@
             <article class="info-card">
               <h3>Photo Gallery</h3>
               <p>
-                This first draft uses the tournament photo currently available. Additional pictures from
-                the event can be added here later to create a fuller gallery of the day.
+                Additional pictures from the event can be added here later to create a fuller gallery of the day.
               </p>
             </article>
           </div>
@@ -1561,8 +1556,8 @@
           <article class="contact-card">
             <h3>Get Involved</h3>
             <p>
-              Future versions of the site can include sponsorship details, golf registration information,
-              donation options, and board contact information.
+              Reach out with any questions about the scholarship, the tournament, or opportunities to
+              donate and support future student recipients.
             </p>
           </article>
         </div>
